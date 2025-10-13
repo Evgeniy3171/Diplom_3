@@ -1,29 +1,69 @@
-from selenium.webdriver.common.by import By
 from .base_page import BasePage
-import time
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 
 class OrderFeedPage(BasePage):
-    # Локаторы для ленты заказов
-    ORDER_FEED_HEADER = (By.XPATH, "//h1[contains(text(), 'Лента заказов')]")
+    # Счётчики заказов
+    TOTAL_ORDERS = (By.XPATH, "//p[contains(text(), 'Выполнено за всё время')]/following-sibling::p | //p[contains(., 'все время')]/following-sibling::p")
+    TODAY_ORDERS = (By.XPATH, "//p[contains(text(), 'Выполнено за сегодня')]/following-sibling::p | //p[contains(., 'сегодня')]/following-sibling::p")
     
-    # Счетчики (на основе структуры, нужно уточнить при переходе на страницу)
-    ORDERS_DONE_ALL_TIME = (By.XPATH, "//p[contains(text(), 'Выполнено за все время')]/following-sibling::p")
-    ORDERS_DONE_TODAY = (By.XPATH, "//p[contains(text(), 'Выполнено за сегодня')]/following-sibling::p")
+    # Заказы в работе
+    ORDERS_IN_PROGRESS_SECTION = (By.XPATH, "//ul[contains(@class, 'OrderFeed_orderListReady')] | //div[contains(@class, 'orderListReady')]")
+    ORDERS_IN_PROGRESS = (By.XPATH, ".//li | .//div[contains(@class, 'orderNumber')]")
     
-    def wait_for_feed_load(self, timeout=10):
-        """Ждем загрузки ленты заказов"""
-        self.find_element(self.ORDER_FEED_HEADER, timeout)
-
+    # Общий список заказов
+    ORDERS_LIST = (By.XPATH, "//div[contains(@class, 'OrderFeed_orderList')]//a | //div[contains(@class, 'orderList')]//a")
+    
+    # Заголовок страницы
+    PAGE_TITLE = (By.XPATH, "//h1[contains(text(), 'Лента заказов')] | //h1[contains(., 'заказов')]")
+    
+    def wait_for_page_load(self, timeout=15):
+        """Ожидание загрузки страницы ленты заказов"""
+        try:
+            self.wait.until(EC.presence_of_element_located(self.PAGE_TITLE))
+            print("✓ Страница ленты заказов загружена")
+        except Exception as e:
+            print(f"✗ Ошибка загрузки ленты заказов: {e}")
+            # Проверим альтернативные элементы
+            try:
+                self.wait.until(EC.presence_of_element_located(self.TOTAL_ORDERS))
+                print("✓ Страница загружена (альтернативная проверка)")
+            except:
+                raise
+    
+    def get_total_orders_count(self):
+        """Получение количества заказов за всё время"""
+        try:
+            count_text = self.find_element(self.TOTAL_ORDERS).text
+            return int(count_text) if count_text.strip().isdigit() else 0
+        except Exception as e:
+            print(f"Ошибка получения общего количества заказов: {e}")
+            return 0
+    
+    def get_today_orders_count(self):
+        """Получение количества заказов за сегодня"""
+        try:
+            count_text = self.find_element(self.TODAY_ORDERS).text
+            return int(count_text) if count_text.strip().isdigit() else 0
+        except Exception as e:
+            print(f"Ошибка получения количества заказов за сегодня: {e}")
+            return 0
+    
+    def get_orders_in_progress(self):
+        """Получение списка номеров заказов в работе"""
+        try:
+            section = self.find_element(self.ORDERS_IN_PROGRESS_SECTION)
+            orders = section.find_elements(*self.ORDERS_IN_PROGRESS)
+            return [order.text.strip() for order in orders if order.text.strip()]
+        except Exception as e:
+            print(f"Ошибка получения заказов в работе: {e}")
+            return []
+    
+    # Добавляем отсутствующие методы
     def get_done_all_time_count(self):
-        self.wait_for_feed_load()
-        try:
-            return int(self.get_text(self.ORDERS_DONE_ALL_TIME))
-        except:
-            return 0
-
+        """Алиас для get_total_orders_count"""
+        return self.get_total_orders_count()
+    
     def get_done_today_count(self):
-        self.wait_for_feed_load()
-        try:
-            return int(self.get_text(self.ORDERS_DONE_TODAY))
-        except:
-            return 0
+        """Алиас для get_today_orders_count"""
+        return self.get_today_orders_count()

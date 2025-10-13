@@ -1,0 +1,24 @@
+Webdriver-manager failed: [WinError 193] %1 не является приложением Win32. Trying manual driver...
+Selector: //a[contains(@href, 'constructor')] - Found 0 elements
+Selector: //a[contains(text(), 'Конструктор')] - Found 0 elements
+Selector: //a[contains(@href, 'feed')] - Found 1 elements
+  Element 0: Лента Заказов
+Selector: //a[contains(text(), 'Лента заказов')] - Found 0 elements
+Selector: //div[contains(@class, 'BurgerIngredients_ingredients__')] - Found 1 elements
+  Element 0: Булки
+0
+988
+Флюоресцентная булка R2-D3
+0
+1255
+Крат
+Selector: //section[contains(@class, 'BurgerConstructor')] - Found 1 elements
+  Element 0: Перетяните булочку сюда (верх)
+0
+Перетяните булочк
+Selector: //div[contains(@class, 'Modal_modal')] - Found 6 elements
+  Element 0: No text
+  Element 1: No text
+  Element 2: No text
+Selector: //button[contains(@class, 'button_button')] - Found 1 elements
+  Element 0: Войти в аккаунт

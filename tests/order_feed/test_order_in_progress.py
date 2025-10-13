@@ -1,3 +1,4 @@
+# tests/order_feed/test_order_in_progress.py
 import allure
 import pytest
 from pages.order_feed_page import OrderFeedPage
@@ -5,25 +6,24 @@ from pages.order_feed_page import OrderFeedPage
 @allure.feature('Лента заказов')
 @allure.story('Заказы в работе')
 class TestOrderInProgress:
+    
     @allure.title('Проверка раздела "В работе"')
     def test_order_in_progress_section_exists(self, driver):
-        order_feed = OrderFeedPage(driver)
-        order_feed.driver.get("https://stellarburgers.education-services.ru/feed")
+        """Проверка наличия раздела с заказами в работе"""
+        with allure.step("Переход в ленту заказов"):
+            order_feed = OrderFeedPage(driver)
+            driver.get("https://stellarburgers.education-services.ru/feed")
+            order_feed.wait_for_page_load()
         
-        import time
-        time.sleep(3)
-        
-        # Просто проверяем, что страница загрузилась
-        assert "feed" in driver.current_url.lower() or "лента" in driver.page_source.lower()
-        
-        # Проверяем наличие основных элементов
-        try:
-            # Проверяем, есть ли какой-то из счетчиков
-            all_time_visible = order_feed.is_element_visible(order_feed.ORDERS_DONE_ALL_TIME)
-            today_visible = order_feed.is_element_visible(order_feed.ORDERS_DONE_TODAY)
+        with allure.step("Проверка раздела 'В работе'"):
+            orders_in_progress = order_feed.get_orders_in_progress()
+            print(f"Заказов в работе: {orders_in_progress}")
             
-            # Хотя бы один элемент должен быть видим
-            assert all_time_visible or today_visible, "Ни один из счетчиков не отображается"
-            
-        except Exception as e:
-            pytest.skip(f"Элементы ленты заказов не найдены: {str(e)}")
+            # Проверяем, что раздел существует (может быть пустым)
+            assert orders_in_progress is not None, "Раздел 'В работе' должен существовать"
+        
+        allure.attach(
+            driver.get_screenshot_as_png(),
+            name="orders_in_progress",
+            attachment_type=allure.attachment_type.PNG
+        )

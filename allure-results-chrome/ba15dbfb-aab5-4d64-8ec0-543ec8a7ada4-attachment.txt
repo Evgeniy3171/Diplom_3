@@ -1,0 +1,37 @@
+Webdriver-manager failed: [WinError 193] %1 не является приложением Win32. Trying manual driver...
+Найденные классы:
+  AppHeader_header__X9aJA pb-4 pt-4
+  AppHeader_header__linkText__3q_va ml-2
+  AppHeader_header__link__3D_hX
+  AppHeader_header__link__3D_hX AppHeader_header__link_active__1IkJo
+  AppHeader_header__list__3oKJj
+  AppHeader_header__logo__2D0X2
+  AppHeader_header__nav__g5hnF
+  App_App__aOmNj
+  App_componentContainer__2JC2W
+  BurgerIngredient_ingredient__1TVf6 ml-4 mr-4 mb-8
+  BurgerIngredient_ingredient__image__3e-07 ml-4 mr-4
+  BurgerIngredient_ingredient__priceBox__LVbrB
+  BurgerIngredient_ingredient__price__3p5Rm text text_type_digits-default mb-1 mt-1
+  BurgerIngredient_ingredient__text__yp3dH
+  BurgerIngredients_ingredients__1N8v2
+  BurgerIngredients_ingredients__list__2A-mT
+  BurgerIngredients_ingredients__menuContainer__Xu3Mo
+  active
+  counter_counter__ZNLkj counter_default__28sqi
+  counter_counter__num__3nue1
+  tab_tab__1SPyG  pt-4 pr-10 pb-4 pl-10 noselect
+  tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect
+  text text_type_main-default
+  text text_type_main-large mb-5 mt-10
+  text text_type_main-medium mb-6 mt-10
+  undefined ml-2
+
+Найдено ссылок: 19
+  Ссылка: Конструктор -> https://stellarburgers.education-services.ru/
+  Ссылка: Лента Заказов -> https://stellarburgers.education-services.ru/feed
+  Ссылка:  -> https://stellarburgers.education-services.ru/
+  Ссылка: Личный Кабинет -> https://stellarburgers.education-services.ru/account
+  Ссылка: 0
+988
+Флюоресцентная булка R2-D3 -> https://stellarburgers.education-services.ru/ingredient/61c0c5a71d1f82001bdaaa6d

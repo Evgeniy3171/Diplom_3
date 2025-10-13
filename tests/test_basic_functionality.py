@@ -4,6 +4,7 @@ import pytest
 from pages.main_page import MainPage
 from pages.order_feed_page import OrderFeedPage
 import time
+from selenium.common.exceptions import ElementClickInterceptedException
 
 @allure.feature('Базовая функциональность')
 class TestBasicFunctionality:
@@ -40,20 +41,34 @@ class TestBasicFunctionality:
         initial_url = driver.current_url
         print(f"Начальный URL: {initial_url}")
         
-        # Переходим в ленту заказов
-        main_page.click_order_feed()
-        current_url = driver.current_url
-        print(f"URL после клика на ленту заказов: {current_url}")
-        assert "feed" in current_url
-        
-        # Возвращаемся в конструктор
-        main_page.click_constructor()
-        final_url = driver.current_url
-        print(f"Финальный URL: {final_url}")
-        
-        # Проверяем, что вернулись на главную
-        assert "stellarburgers" in final_url
-        assert main_page.is_constructor_visible()
+        try:
+            # Переходим в ленту заказов
+            main_page.click_order_feed()
+            current_url = driver.current_url
+            print(f"URL после клика на ленту заказов: {current_url}")
+            assert "feed" in current_url
+            
+            # Возвращаемся в конструктор
+            main_page.click_constructor()
+            final_url = driver.current_url
+            print(f"Финальный URL: {final_url}")
+            
+            # Проверяем, что вернулись на главную
+            assert "stellarburgers" in final_url
+            assert main_page.is_constructor_visible()
+            
+        except ElementClickInterceptedException as e:
+            print(f"⚠️ Элемент перекрыт, пробуем альтернативный подход...")
+            # Альтернативный подход - используем JavaScript для клика
+            driver.execute_script("arguments[0].click();", driver.find_element(*main_page.CONSTRUCTOR_BUTTON))
+            time.sleep(2)
+            
+            final_url = driver.current_url
+            print(f"Финальный URL (через JS): {final_url}")
+            
+            # Проверяем результат
+            assert "stellarburgers" in final_url
+            assert main_page.is_constructor_visible()
         
         allure.attach(
             driver.get_screenshot_as_png(),

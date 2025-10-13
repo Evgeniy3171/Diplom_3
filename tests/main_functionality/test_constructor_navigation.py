@@ -19,16 +19,16 @@ class TestConstructorNavigation:
             main_page.click_order_feed()
             order_feed_page = OrderFeedPage(driver)
             assert "feed" in driver.current_url
-            print("✓ Успешно перешли в ленту заказов")
+            print(f"✓ Успешно перешли в ленту заказов в {driver.name}")
         
         with allure.step("Возврат в конструктор"):
             main_page.click_constructor()
             assert "stellarburgers" in driver.current_url
             assert main_page.is_constructor_visible()
-            print("✓ Успешно вернулись в конструктор")
+            print(f"✓ Успешно вернулись в конструктор в {driver.name}")
         
         allure.attach(
             driver.get_screenshot_as_png(),
-            name="constructor_navigation",
+            name=f"constructor_navigation_{driver.name}",
             attachment_type=allure.attachment_type.PNG
         )

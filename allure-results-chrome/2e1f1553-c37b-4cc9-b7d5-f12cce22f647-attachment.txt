@@ -1,0 +1,5 @@
+❌ Webdriver-manager для Chrome не сработал: [WinError 193] %1 не является приложением Win32
+🔄 Пробуем ручной путь...
+✅ Chrome драйвер запущен через ручной путь: C:\WebDriver\bin\chromedriver.exe
+✅ Найдено видимое модальное окно: //section[contains(@class, 'Modal_modal_opened__3ISw4')]
+✅ Тест пройден: модальное окно открывается и закрывается корректно

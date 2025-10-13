@@ -1,0 +1,9 @@
+✅ Firefox драйвер запущен через webdriver-manager
+✓ Страница загружена успешно
+Начальный URL: https://stellarburgers.education-services.ru/
+Кликаем на ленту заказов...
+✓ Страница ленты заказов загружена
+URL после клика на ленту заказов: https://stellarburgers.education-services.ru/feed
+Кликаем на конструктор...
+✓ Страница загружена успешно
+Финальный URL: https://stellarburgers.education-services.ru/

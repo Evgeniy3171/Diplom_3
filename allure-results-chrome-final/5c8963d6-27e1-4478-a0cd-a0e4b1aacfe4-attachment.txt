@@ -1,0 +1,11 @@
+❌ Webdriver-manager для Chrome не сработал: [WinError 193] %1 не является приложением Win32
+🔄 Пробуем ручной путь...
+✅ Chrome драйвер запущен через ручной путь: C:\WebDriver\bin\chromedriver.exe
+✓ Страница загружена успешно
+Начальный URL: https://stellarburgers.education-services.ru/
+Кликаем на ленту заказов...
+✓ Страница ленты заказов загружена
+URL после клика на ленту заказов: https://stellarburgers.education-services.ru/feed
+Кликаем на конструктор...
+✓ Страница загружена успешно
+Финальный URL: https://stellarburgers.education-services.ru/

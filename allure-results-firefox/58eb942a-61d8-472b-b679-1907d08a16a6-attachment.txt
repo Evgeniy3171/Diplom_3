@@ -1,0 +1,25 @@
+❌ Webdriver-manager для Firefox не сработал: response body:
+{"message":"API rate limit exceeded for 136.169.211.70. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
+
+request url:
+https://api.github.com/repos/mozilla/geckodriver/releases/latest
+response headers:
+{'Date': 'Mon, 13 Oct 2025 14:16:37 GMT', 'Server': 'Varnish', 'Strict-Transport-Security': 'max-age=31536000; includeSubdomains; preload', 'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'deny', 'X-XSS-Protection': '1; mode=block', 'Content-Security-Policy': "default-src 'none'; style-src 'unsafe-inline'", 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-RateLimit-Used, X-RateLimit-Resource, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, Deprecation, Sunset', 'Content-Type': 'application/json; charset=utf-8', 'Referrer-Policy': 'origin-when-cross-origin, strict-origin-when-cross-origin', 'X-GitHub-Media-Type': 'github.v3; format=json', 'X-RateLimit-Limit': '60', 'X-RateLimit-Remaining': '0', 'X-RateLimit-Reset': '1760366089', 'X-RateLimit-Resource': 'core', 'X-RateLimit-Used': '60', 'Content-Length': '280', 'X-GitHub-Request-Id': 'C5B4:211A0B:5C4E56E:5531C50:68ED09C5'}
+
+🔄 Пробуем ручной путь...
+✅ Firefox драйвер запущен через ручной путь: E:\New_Work\QA\GIT_Projects\Diplom_3\drivers\geckodriver.exe
+✓ Страница загружена успешно
+✓ Страница загружена успешно
+Перетаскиваем ингредиент...
+Используем альтернативное перетаскивание для Firefox...
+✓ Ингредиент перетащен
+Булка: было 0, стало 2
+Перетаскиваем ингредиент...
+Используем альтернативное перетаскивание для Firefox...
+✓ Ингредиент перетащен
+Соус: было 2, стало 2
+Перетаскиваем ингредиент...
+Используем альтернативное перетаскивание для Firefox...
+✓ Ингредиент перетащен
+Начинка: было 2, стало 2
+Можно оформить заказ: False

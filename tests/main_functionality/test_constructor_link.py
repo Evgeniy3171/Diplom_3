@@ -19,11 +19,13 @@ class TestConstructorLink:
             main_page.click_order_feed()
             order_feed_page = OrderFeedPage(driver)
             assert "feed" in driver.current_url, "Не перешли в ленту заказов"
+            print("✅ Успешно перешли в ленту заказов")
         
         with allure.step("Возврат в конструктор"):
             main_page.click_constructor()
             assert driver.current_url == "https://stellarburgers.education-services.ru/", "Не вернулись в конструктор"
             assert main_page.is_constructor_visible(), "Конструктор не отображается"
+            print("✅ Успешно вернулись в конструктор")
         
         allure.attach(
             driver.get_screenshot_as_png(),

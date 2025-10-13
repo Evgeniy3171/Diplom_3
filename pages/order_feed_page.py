@@ -4,18 +4,18 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class OrderFeedPage(BasePage):
     # Счётчики заказов
-    TOTAL_ORDERS = (By.XPATH, "//p[contains(text(), 'Выполнено за всё время')]/following-sibling::p | //p[contains(., 'все время')]/following-sibling::p")
-    TODAY_ORDERS = (By.XPATH, "//p[contains(text(), 'Выполнено за сегодня')]/following-sibling::p | //p[contains(., 'сегодня')]/following-sibling::p")
+    TOTAL_ORDERS = (By.XPATH, "//p[contains(text(), 'Выполнено за всё время')]/following-sibling::p")
+    TODAY_ORDERS = (By.XPATH, "//p[contains(text(), 'Выполнено за сегодня')]/following-sibling::p")
     
     # Заказы в работе
-    ORDERS_IN_PROGRESS_SECTION = (By.XPATH, "//ul[contains(@class, 'OrderFeed_orderListReady')] | //div[contains(@class, 'orderListReady')]")
-    ORDERS_IN_PROGRESS = (By.XPATH, ".//li | .//div[contains(@class, 'orderNumber')]")
+    ORDERS_IN_PROGRESS_SECTION = (By.XPATH, "//ul[contains(@class, 'OrderFeed_orderListReady')]")
+    ORDERS_IN_PROGRESS = (By.XPATH, ".//li")
     
     # Общий список заказов
-    ORDERS_LIST = (By.XPATH, "//div[contains(@class, 'OrderFeed_orderList')]//a | //div[contains(@class, 'orderList')]//a")
+    ORDERS_LIST = (By.XPATH, "//div[contains(@class, 'OrderFeed_orderList')]//a")
     
     # Заголовок страницы
-    PAGE_TITLE = (By.XPATH, "//h1[contains(text(), 'Лента заказов')] | //h1[contains(., 'заказов')]")
+    PAGE_TITLE = (By.XPATH, "//h1[contains(text(), 'Лента заказов')]")
     
     def wait_for_page_load(self, timeout=15):
         """Ожидание загрузки страницы ленты заказов"""

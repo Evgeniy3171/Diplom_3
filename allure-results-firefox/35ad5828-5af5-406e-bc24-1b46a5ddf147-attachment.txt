@@ -1,0 +1,4 @@
+✅ Firefox драйвер запущен через webdriver-manager
+✓ Страница загружена успешно
+Заголовок страницы: Stellar Burgers
+Текущий URL: https://stellarburgers.education-services.ru/

@@ -67,3 +67,7 @@ class OrderFeedPage(BasePage):
     def get_done_today_count(self):
         """Алиас для get_today_orders_count"""
         return self.get_today_orders_count()
+    
+    def is_order_feed_page(self):
+        """Проверка, что находимся на странице ленты заказов"""
+        return "feed" in self.driver.current_url and self.is_element_visible(self.PAGE_TITLE)

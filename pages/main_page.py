@@ -118,3 +118,7 @@ class MainPage(BasePage):
     def is_constructor_visible(self):
         """Проверка видимости конструктора"""
         return self.is_element_visible(self.CONSTRUCTOR_AREA)
+    
+    def is_constructor_page(self):
+        """Проверка, что находимся на странице конструктора"""
+        return "stellarburgers.education-services.ru" in self.driver.current_url and "feed" not in self.driver.current_url

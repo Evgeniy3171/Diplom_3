@@ -11,18 +11,16 @@ class TestOrderFeedNavigation:
     @allure.title('Переход в ленту заказов из конструктора')
     def test_order_feed_navigation(self, driver):
         """Проверка перехода в ленту заказов по клику на кнопку"""
-        with allure.step("Переход на главную страницу"):
-            main_page = MainPage(driver)
-            main_page.go_to_main_page()
+        main_page = MainPage(driver)
+        main_page.go_to_main_page()
         
-        with allure.step("Переход в ленту заказов"):
-            main_page.click_order_feed()
-            order_feed_page = OrderFeedPage(driver)
-            
-            # Проверяем, что перешли на страницу ленты заказов
-            assert "feed" in driver.current_url
-            assert order_feed_page.is_element_visible(order_feed_page.PAGE_TITLE)
-            print("✓ Успешно перешли в ленту заказов")
+        # Переходим в ленту заказов
+        main_page.click_order_feed()
+        order_feed_page = OrderFeedPage(driver)
+        
+        # Проверяем, что перешли на страницу ленты заказов
+        assert order_feed_page.is_order_feed_page()
+        print("✅ Успешно перешли в ленту заказов")
         
         allure.attach(
             driver.get_screenshot_as_png(),

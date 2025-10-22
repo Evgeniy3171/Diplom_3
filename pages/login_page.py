@@ -1,3 +1,5 @@
+# pages/login_page.py
+import allure
 from .base_page import BasePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -9,26 +11,30 @@ class LoginPage(BasePage):
     
     # Кнопки
     LOGIN_BUTTON = (By.XPATH, "//button[contains(text(), 'Войти')]")
-    REGISTER_LINK = (By.XPATH, "//a[contains(text(), 'Зарегистрироваться')]")
-    FORGOT_PASSWORD_LINK = (By.XPATH, "//a[contains(text(), 'Восстановить пароль')]")
     
+    @allure.step("Перейти на страницу авторизации")
+    def go_to_login_page(self):
+        self.go_to_url(self.urls.LOGIN_PAGE)
+        self.wait_for_page_load()
+    
+    @allure.step("Ожидать загрузки страницы авторизации")
     def wait_for_page_load(self):
-        """Ожидание загрузки страницы авторизации"""
         self.wait.until(EC.presence_of_element_located(self.EMAIL_INPUT))
     
-    def login(self, email, password):
-        """Авторизация пользователя"""
+    @allure.step("Ввести email: {email}")
+    def enter_email(self, email):
         self.find_element(self.EMAIL_INPUT).send_keys(email)
+    
+    @allure.step("Ввести пароль")
+    def enter_password(self, password):
         self.find_element(self.PASSWORD_INPUT).send_keys(password)
+    
+    @allure.step("Нажать кнопку входа")
+    def click_login_button(self):
         self.click(self.LOGIN_BUTTON)
     
-    def is_login_successful(self):
-        """Проверка успешной авторизации"""
-        try:
-            # После успешного логина должны попасть на главную страницу
-            from .main_page import MainPage
-            main_page = MainPage(self.driver)
-            main_page.wait_for_page_load()
-            return True
-        except:
-            return False
+    @allure.step("Выполнить авторизацию")
+    def login(self, email, password):
+        self.enter_email(email)
+        self.enter_password(password)
+        self.click_login_button()

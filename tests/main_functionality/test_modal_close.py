@@ -15,19 +15,9 @@ class TestModalClose:
         with allure.step("Открытие модального окна"):
             main_page.click_ingredient(main_page.FIRST_BUN)
             assert main_page.is_modal_displayed(), "Модальное окно должно отображаться"
-            
-            allure.attach(
-                driver.get_screenshot_as_png(),
-                name="modal_opened",
-                attachment_type=allure.attachment_type.PNG
-            )
-        
+                    
         with allure.step("Закрытие модального окна"):
             main_page.close_modal()
             assert not main_page.is_modal_displayed(), "Модальное окно должно закрыться"
             
-            allure.attach(
-                driver.get_screenshot_as_png(),
-                name="modal_closed",
-                attachment_type=allure.attachment_type.PNG
-            )
+            

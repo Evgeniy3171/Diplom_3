@@ -1,4 +1,3 @@
-# tests/order_feed/test_today_orders.py
 import allure
 import pytest
 from pages.order_feed_page import OrderFeedPage
@@ -20,8 +19,3 @@ class TestTodayOrders:
             assert today_orders >= 0, "Счетчик за сегодня должен быть неотрицательным числом"
             print(f"✓ Заказов за сегодня: {today_orders}")
         
-        allure.attach(
-            driver.get_screenshot_as_png(),
-            name="today_orders",
-            attachment_type=allure.attachment_type.PNG
-        )

@@ -1,4 +1,3 @@
-# tests/main_functionality/test_ingredient_modal.py
 import allure
 import pytest
 from pages.main_page import MainPage
@@ -23,12 +22,7 @@ class TestIngredientModal:
         assert not main_page.is_modal_displayed()
         print("✅ Модальное окно закрыто")
         
-        allure.attach(
-            driver.get_screenshot_as_png(),
-            name="ingredient_modal",
-            attachment_type=allure.attachment_type.PNG
-        )
-    
+            
     @allure.title('Проверка модальных окон для разных типов ингредиентов')
     def test_different_ingredients_modals(self, driver):
         """Проверка модальных окон для булок, соусов и начинок"""

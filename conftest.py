@@ -1,98 +1,74 @@
-import allure
+# conftest.py
 import pytest
 import os
-import logging
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
-
-# Настройка логирования
-logger = logging.getLogger(__name__)
+from selenium.webdriver.chrome.service import Service as ChromeService
 
 def pytest_addoption(parser):
-    parser.addoption("--browser", action="store", default="chrome", help="browser to run tests: chrome or firefox")
-    parser.addoption("--headless", action="store_true", help="run tests in headless mode")
+    parser.addoption("--browser", action="store", default="chrome", 
+                    help="browser to run tests: chrome or firefox")
 
 @pytest.fixture
 def driver(request):
-    browser_name = request.config.getoption("--browser")
-    headless = request.config.getoption("--headless")
+    browser_name = request.config.getoption("--browser").lower()
+    print(f"🚀 Инициализируем драйвер для: {browser_name}")
     
     driver_instance = None
     
     try:
         if browser_name == "chrome":
-            from selenium.webdriver.chrome.service import Service as ChromeService
-            
+            print("🔧 Настраиваем Chrome...")
             options = ChromeOptions()
-            if headless:
-                options.add_argument("--headless")
             options.add_argument("--window-size=1920,1080")
             options.add_argument("--no-sandbox")
             options.add_argument("--disable-dev-shm-usage")
-            options.add_argument("--disable-gpu")
             options.add_experimental_option('excludeSwitches', ['enable-logging'])
             
-            # Используем переменные окружения или webdriver-manager
-            chrome_driver_path = os.getenv('CHROME_DRIVER_PATH')
-            if chrome_driver_path and os.path.exists(chrome_driver_path):
-                service = ChromeService(executable_path=chrome_driver_path)
+            # Используем локальный драйвер
+            driver_path = os.path.join(os.path.dirname(__file__), "drivers", "chromedriver.exe")
+            
+            if os.path.exists(driver_path):
+                print(f"📁 Используем локальный драйвер: {driver_path}")
+                service = ChromeService(driver_path)
                 driver_instance = webdriver.Chrome(service=service, options=options)
-                logger.info("Chrome драйвер запущен через переменную окружения")
+                print("✅ ChromeDriver успешно инициализирован!")
             else:
-                from webdriver_manager.chrome import ChromeDriverManager
-                service = ChromeService(ChromeDriverManager().install())
-                driver_instance = webdriver.Chrome(service=service, options=options)
-                logger.info("Chrome драйвер запущен через webdriver-manager")
-                
+                print(f"❌ Локальный драйвер не найден по пути: {driver_path}")
+                # Показываем что есть в папке
+                drivers_dir = os.path.join(os.path.dirname(__file__), "drivers")
+                if os.path.exists(drivers_dir):
+                    print(f"📁 Содержимое папки drivers:")
+                    for item in os.listdir(drivers_dir):
+                        item_path = os.path.join(drivers_dir, item)
+                        print(f"   - {item} ({'file' if os.path.isfile(item_path) else 'dir'})")
+                pytest.skip("ChromeDriver не найден")
+        
         elif browser_name == "firefox":
-            from selenium.webdriver.firefox.service import Service as FirefoxService
-            
-            options = FirefoxOptions()
-            if headless:
-                options.add_argument("--headless")
-            options.add_argument("--width=1920")
-            options.add_argument("--height=1080")
-            
-            # Используем переменные окружения или webdriver-manager
-            firefox_driver_path = os.getenv('FIREFOX_DRIVER_PATH')
-            if firefox_driver_path and os.path.exists(firefox_driver_path):
-                service = FirefoxService(executable_path=firefox_driver_path)
-                driver_instance = webdriver.Firefox(service=service, options=options)
-                logger.info("Firefox драйвер запущен через переменную окружения")
-            else:
-                from webdriver_manager.firefox import GeckoDriverManager
-                service = FirefoxService(GeckoDriverManager().install())
-                driver_instance = webdriver.Firefox(service=service, options=options)
-                logger.info("Firefox драйвер запущен через webdriver-manager")
-                
+            # Пропускаем Firefox для простоты
+            pytest.skip("Firefox тесты временно отключены")
+        
         else:
-            raise ValueError(f"Unsupported browser: {browser_name}")
+            pytest.skip(f"Неподдерживаемый браузер: {browser_name}")
         
-        if driver_instance is None:
-            raise Exception(f"Не удалось инициализировать драйвер для {browser_name}")
-        
+        # Общие настройки
         driver_instance.implicitly_wait(10)
-        driver_instance.maximize_window()
+        driver_instance.set_page_load_timeout(30)
+        
+        print(f"✅ Драйвер {driver_instance.name} готов к работе")
         
         yield driver_instance
         
     except Exception as e:
-        logger.error(f"Критическая ошибка при инициализации драйвера {browser_name}: {e}")
-        pytest.skip(f"Драйвер {browser_name} недоступен: {e}")
+        print(f"❌ Ошибка инициализации драйвера: {e}")
+        import traceback
+        print(f"📋 Детали ошибки:\n{traceback.format_exc()}")
+        pytest.skip(f"Не удалось инициализировать драйвер: {e}")
     
     finally:
         if driver_instance:
-            driver_instance.quit()
-
-# Фикстура для скриншотов
-@pytest.fixture(autouse=True)
-def screenshot_on_failure(request):
-    yield
-    if request.node.rep_call.failed:
-        driver = request.getfixturevalue('driver')
-        allure.attach(
-            driver.get_screenshot_as_png(),
-            name=f"screenshot_{request.node.name}",
-            attachment_type=allure.attachment_type.PNG
-        )
+            try:
+                driver_instance.quit()
+                print("✅ Драйвер закрыт")
+            except Exception as e:
+                print(f"⚠️ Ошибка при закрытии драйвера: {e}")

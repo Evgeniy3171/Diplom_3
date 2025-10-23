@@ -1,4 +1,3 @@
-# tests/test_basic_functionality.py
 import allure
 import pytest
 from pages.main_page import MainPage

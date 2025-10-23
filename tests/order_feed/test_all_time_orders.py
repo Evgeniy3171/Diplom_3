@@ -1,4 +1,3 @@
-# tests/order_feed/test_all_time_orders.py
 import allure
 import pytest
 from pages.order_feed_page import OrderFeedPage
@@ -20,8 +19,3 @@ class TestAllTimeOrders:
             assert total_orders >= 0, "Счетчик за все время должен быть неотрицательным числом"
             print(f"Заказов за все время: {total_orders}")
         
-        allure.attach(
-            driver.get_screenshot_as_png(),
-            name="all_time_orders",
-            attachment_type=allure.attachment_type.PNG
-        )

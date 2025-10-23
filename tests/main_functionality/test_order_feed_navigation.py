@@ -1,4 +1,3 @@
-# tests/main_functionality/test_order_feed_navigation.py
 import allure
 import pytest
 from pages.main_page import MainPage
@@ -22,8 +21,4 @@ class TestOrderFeedNavigation:
         assert order_feed_page.is_order_feed_page()
         print("✅ Успешно перешли в ленту заказов")
         
-        allure.attach(
-            driver.get_screenshot_as_png(),
-            name="order_feed_navigation",
-            attachment_type=allure.attachment_type.PNG
-        )
+        

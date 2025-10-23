@@ -1,4 +1,3 @@
-# tests/main_functionality/test_constructor_basic.py
 import allure
 import pytest
 from pages.main_page import MainPage
@@ -35,8 +34,4 @@ class TestConstructorBasic:
         
         print(f"✅ Базовый функционал конструктора проверен в {driver.name}")
         
-        allure.attach(
-            driver.get_screenshot_as_png(),
-            name=f"constructor_basic_{driver.name}",
-            attachment_type=allure.attachment_type.PNG
-        )
+        

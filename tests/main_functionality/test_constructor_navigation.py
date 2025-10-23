@@ -1,4 +1,3 @@
-# tests/main_functionality/test_constructor_navigation.py
 import allure
 import pytest
 from pages.main_page import MainPage
@@ -26,8 +25,4 @@ class TestConstructorNavigation:
         assert main_page.is_constructor_visible()
         print("✅ Успешно вернулись в конструктор")
         
-        allure.attach(
-            driver.get_screenshot_as_png(),
-            name="constructor_navigation",
-            attachment_type=allure.attachment_type.PNG
-        )
+        

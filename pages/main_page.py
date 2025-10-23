@@ -87,4 +87,4 @@ class MainPage(BasePage):
     @allure.step("Проверить что находимся на странице конструктора")
     def is_constructor_page(self):
         current_url = self.get_current_url()
-        return self.urls.MAIN_PAGE in current_url and self.is_constructor_visible()
+        return current_url == self.urls.MAIN_PAGE and self.is_constructor_visible()

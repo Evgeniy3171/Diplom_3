@@ -1,4 +1,3 @@
-# tests/order_feed/test_order_feed_counters.py
 import allure
 import pytest
 from pages.order_feed_page import OrderFeedPage
@@ -20,11 +19,6 @@ class TestOrderFeedCounters:
             assert total_orders >= 0, "Счетчик за все время должен быть неотрицательным числом"
             print(f"✓ Заказов за все время: {total_orders}")
         
-        allure.attach(
-            driver.get_screenshot_as_png(),
-            name="all_time_orders",
-            attachment_type=allure.attachment_type.PNG
-        )
     
     @allure.title('Проверка отображения счетчика "Выполнено за сегодня"')
     def test_today_orders_displayed(self, driver):
@@ -39,8 +33,3 @@ class TestOrderFeedCounters:
             assert today_orders >= 0, "Счетчик за сегодня должен быть неотрицательным числом"
             print(f"✓ Заказов за сегодня: {today_orders}")
         
-        allure.attach(
-            driver.get_screenshot_as_png(),
-            name="today_orders",
-            attachment_type=allure.attachment_type.PNG
-        )

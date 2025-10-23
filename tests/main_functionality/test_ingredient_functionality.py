@@ -1,4 +1,3 @@
-# tests/main_functionality/test_ingredient_functionality.py
 import allure
 import pytest
 from pages.main_page import MainPage
@@ -70,8 +69,3 @@ class TestIngredientFunctionality:
         
         print(f"✅ Функциональность ингредиентов проверена в {driver.name}")
         
-        allure.attach(
-            driver.get_screenshot_as_png(),
-            name=f"ingredient_functionality_{driver.name}",
-            attachment_type=allure.attachment_type.PNG
-        )

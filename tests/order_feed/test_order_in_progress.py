@@ -1,4 +1,3 @@
-# tests/order_feed/test_order_in_progress.py
 import allure
 import pytest
 from pages.order_feed_page import OrderFeedPage
@@ -22,8 +21,3 @@ class TestOrderInProgress:
             # Проверяем, что раздел существует (может быть пустым)
             assert orders_in_progress is not None, "Раздел 'В работе' должен существовать"
         
-        allure.attach(
-            driver.get_screenshot_as_png(),
-            name="orders_in_progress",
-            attachment_type=allure.attachment_type.PNG
-        )

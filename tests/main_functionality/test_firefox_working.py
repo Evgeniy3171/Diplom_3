@@ -1,4 +1,3 @@
-# tests/main_functionality/test_firefox_working.py
 import allure
 import pytest
 from pages.main_page import MainPage
@@ -85,8 +84,4 @@ class TestFirefoxWorking:
         main_page.close_modal()
         print("✅ Интерактивность ингредиентов работает")
         
-        allure.attach(
-            driver.get_screenshot_as_png(),
-            name=f"counters_{driver.name}",
-            attachment_type=allure.attachment_type.PNG
-        )
+        

@@ -1,12 +1,14 @@
+# utils/locator_helper.py
 from selenium.webdriver.common.by import By
-import time
+import logging
+
+logger = logging.getLogger(__name__)
 
 def debug_locators(driver):
-    """Функция для отладки локаторов"""
-    driver.get("https://stellarburgers.education-services.ru/")
-    time.sleep(3)
+    logger.info("Debugging locators on the page")
     
-    # Попробуем найти различные элементы
+    driver.get("https://stellarburgers.nomorepartiessite.ru/")
+    
     test_selectors = [
         "//a[contains(@href, 'constructor')]",
         "//a[contains(text(), 'Конструктор')]",
@@ -21,9 +23,9 @@ def debug_locators(driver):
     for selector in test_selectors:
         try:
             elements = driver.find_elements(By.XPATH, selector)
-            print(f"Selector: {selector} - Found {len(elements)} elements")
+            logger.info(f"Selector: {selector} - Found {len(elements)} elements")
             if elements:
-                for i, elem in enumerate(elements[:3]):  # Покажем первые 3 элемента
-                    print(f"  Element {i}: {elem.text[:50] if elem.text else 'No text'}")
+                for i, elem in enumerate(elements[:3]):
+                    logger.debug(f"  Element {i}: {elem.text[:50] if elem.text else 'No text'}")
         except Exception as e:
-            print(f"Selector: {selector} - Error: {e}")
+            logger.error(f"Selector: {selector} - Error: {e}")

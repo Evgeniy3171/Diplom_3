@@ -1,0 +1,15 @@
+=== SIMPLE INGREDIENT COUNTER TEST ===
+Looking for sauce section...
+Found 1 sauce headers
+Sauce header text: 'Соусы'
+Sauce section class: 'BurgerIngredients_ingredients__menuContainer__Xu3Mo'
+Found 15 sauce ingredients
+First sauce class: 'BurgerIngredient_ingredient__1TVf6 ml-4 mr-4 mb-8'
+Found 1 counters on ingredient
+Counter text: '0'
+Initial counter: 0
+Found 1 constructor areas
+Drag and drop performed
+Found 1 counters after drag
+Counter after text: '0'
+Updated counter: 0

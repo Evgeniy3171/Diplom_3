@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.env
+*.log
+allure-results/
+allure-report/
+.pytest_cache/
+*.egg-info/
+.coverage
+htmlcov/

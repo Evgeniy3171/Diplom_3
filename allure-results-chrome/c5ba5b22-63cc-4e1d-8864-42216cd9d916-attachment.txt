@@ -1,0 +1,4 @@
+Webdriver-manager failed: [WinError 193] %1 не является приложением Win32. Trying manual driver...
+✓ Страница загружена успешно
+Заголовок страницы: Stellar Burgers
+Текущий URL: https://stellarburgers.education-services.ru/

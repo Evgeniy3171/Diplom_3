@@ -1,0 +1,21 @@
+Поиск элементов навигации:
+  //a[@href='/']: 2 элементов
+    - Текст: 'Конструктор', href: https://stellarburgers.education-services.ru/
+    - Текст: '', href: https://stellarburgers.education-services.ru/
+  //a[@href='/feed']: 1 элементов
+    - Текст: 'Лента Заказов', href: https://stellarburgers.education-services.ru/feed
+  //a[@href='/account']: 1 элементов
+    - Текст: 'Личный Кабинет', href: https://stellarburgers.education-services.ru/account
+  //a[contains(@class, 'AppHeader_header__link')]: 3 элементов
+    - Текст: 'Конструктор', href: https://stellarburgers.education-services.ru/
+    - Текст: 'Лента Заказов', href: https://stellarburgers.education-services.ru/feed
+
+Поиск разделов ингредиентов:
+  //h2[contains(text(), 'Булки')]: 1 элементов
+  //h2[contains(text(), 'Соусы')]: 1 элементов
+  //h2[contains(text(), 'Начинки')]: 1 элементов
+
+Поиск ингредиентов:
+  //h2[contains(text(), 'Булки')]/following::a[1]: 1 элементов
+  //h2[contains(text(), 'Соусы')]/following::a[1]: 1 элементов
+  //h2[contains(text(), 'Начинки')]/following::a[1]: 1 элементов

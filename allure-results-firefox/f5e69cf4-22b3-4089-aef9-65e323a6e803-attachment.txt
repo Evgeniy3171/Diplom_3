@@ -1,0 +1,3 @@
+✓ Страница загружена успешно
+Начальный URL: https://stellarburgers.education-services.ru/
+Кликаем на ленту заказов...
